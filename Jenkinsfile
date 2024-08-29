@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-repo/terraform-vpc.git'
+            }
+        }
+        stage('Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('Plan') {
+            steps {
+                sh 'terraform plan -out=tfplan'
+            }
+        }
+        stage('Apply') {
+            steps {
+                sh 'terraform apply -input=false tfplan'
+            }
+        }
+    }
+}
