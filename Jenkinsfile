@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/terraform-vpc.git'
+                git 'https://github.com/azahar18/jenkins-vpc-v3'
             }
         }
         stage('Init') {
